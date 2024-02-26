@@ -3,6 +3,9 @@
 /** @type {import('sequelize-cli').Migration} */
 const { Spot } = require('../models')
 let options = { tableName: 'Spots' }
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -119,8 +122,8 @@ module.exports = {
         country: 'Aetheria',
         lat: 70,
         lng: -100,
-        name: 'Legendary Retreat',
-        description: 'Legendary Retreat is a serene haven nestled amidst the gentle hills and whispering willows of Zephyr Heights. As you approach the retreat, the air is filled with the soft rustle of leaves and the sweet fragrance of blooming flowers, carried on the gentle zephyrs that sweep through the landscape. The tranquil atmosphere invites visitors to unwind and relax, offering respite from the hustle and bustle of everyday life.',
+        name: 'Legends Retreat',
+        description: 'Legends Retreat is a serene haven nestled amidst the gentle hills and whispering willows of Zephyr Heights. As you approach the retreat, the air is filled with the soft rustle of leaves and the sweet fragrance of blooming flowers, carried on the gentle zephyrs that sweep through the landscape. The tranquil atmosphere invites visitors to unwind and relax, offering respite from the hustle and bustle of everyday life.',
         price: 500.00
       },
     ], options, { validate: true})
