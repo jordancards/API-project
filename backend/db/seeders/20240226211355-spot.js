@@ -20,11 +20,7 @@ module.exports = {
         await Spot.bulkCreate([
       {
         ownerId: 1,
-<<<<<<< HEAD
-        address: 'South of Alvaris',
-=======
         address: '1922 Alvaris Ln',
->>>>>>> bookings
         city: 'Gleamstone',
         state: 'Dawnshare',
         country: 'Aetheria',
@@ -36,11 +32,8 @@ module.exports = {
       },
       {
         ownerId: 2,
-<<<<<<< HEAD
         address: 'North of Tavernlight',
-=======
         address: '350 Tavernlight',
->>>>>>> bookings
         city: 'Lumina',
         state: 'Everglow',
         country: 'Aetheria',
@@ -52,11 +45,7 @@ module.exports = {
       },
       {
         ownerId: 3,
-<<<<<<< HEAD
-        address: 'Entrance of Nimbus Reach',
-=======
         address: '334 S. Nimbus Reach',
->>>>>>> bookings
         city: 'Mistwood',
         state: 'Arborin',
         country: 'Aetheria',
@@ -68,11 +57,11 @@ module.exports = {
           },
       {
         ownerId: 1,
-<<<<<<< HEAD
+
         address: 'East of Lunar Valley',
-=======
+
         address: '22 E. Lunar Valley',
->>>>>>> bookings
+
         city: 'Moonreach',
         state: 'Silvercrest',
         country: 'Aetheria',
@@ -84,11 +73,10 @@ module.exports = {
       },
       {
         ownerId: 2,
-<<<<<<< HEAD
         address: 'Base of the dormant Pyropeak',
-=======
+
         address: '01 Pyropeak',
->>>>>>> bookings
+
         city: 'Emberfall',
         state: 'Firepeak',
         country: 'Aetheria',
@@ -99,12 +87,8 @@ module.exports = {
         price: 50.00
       },
       {
-        ownerId: 3,
-<<<<<<< HEAD
-        address: 'Inside Tempest\'s Edge behind the Stormweave Library',
-=======
-        address: '122 Stormweave Circle',
->>>>>>> bookings
+              ownerId: 3,
+              address: '122 Stormweave Circle',
         city: 'Stormhaven',
         state: 'Thunderhold',
         country: 'Aetheria',
@@ -116,11 +100,7 @@ module.exports = {
       },
       {
         ownerId: 1,
-<<<<<<< HEAD
-        address: 'In the middle of the Great Sapphire Basin',
-=======
         address: '50 Sapphire Basin',
->>>>>>> bookings
         city: 'Serenity Falls',
         state: 'Crystalbrooks',
         country: 'Aetheria',
@@ -132,11 +112,7 @@ module.exports = {
           },
       {
               ownerId: 2,
-<<<<<<< HEAD
-        address: 'On Frostholm\'s peak',
-=======
         address: '1 Frostholm Peak',
->>>>>>> bookings
         city: 'Frostholm',
         state: 'Frostwind',
         country: 'Aetheria',
@@ -148,11 +124,7 @@ module.exports = {
           },
       {
           ownerId: 3,
-<<<<<<< HEAD
-        address: 'Eastern Zephyr Heights',
-=======
         address: '12 W. Zephyr Heights',
->>>>>>> bookings
         city: 'Willowbrook',
         state: 'Verdantvale',
         country: 'Aetheria',
@@ -175,11 +147,8 @@ module.exports = {
      */
     const Op = Sequelize.Op
     return queryInterface.bulkDelete(options, {
-<<<<<<< HEAD
-      ownerId: { [Op.in]: [1,2,3,4,5,6]}
-=======
+
       ownerId: { [Op.in]: ['Gleamstone Inn', 'Beaming Varia','Silent Shade Sanctuary','Moonbeam Haven','Emberfall Retreat','StormHaven Inn','Serenity Springs Cottage','Frostholm Peak Ascent','Legends Retreat' ]}
->>>>>>> bookings
     })
   }
 };
