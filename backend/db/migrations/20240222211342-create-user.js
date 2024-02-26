@@ -1,10 +1,10 @@
 'use strict';
 
-let options = {};
+let options = { tableName: 'Users'}
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
-
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Users', {
@@ -18,6 +18,14 @@ module.exports = {
         type: Sequelize.STRING(30),
         allowNull: false,
         unique: true
+      },
+      firstName:{
+        type: Sequelize.STRING(30),
+        allowNull: false,
+      },
+      lastName:{
+        type: Sequelize.STRING(30),
+        allowNull: false,
       },
       email: {
         type: Sequelize.STRING(256),
@@ -46,3 +54,4 @@ module.exports = {
     return queryInterface.dropTable(options);
   }
 };
+
