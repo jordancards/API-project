@@ -32,7 +32,6 @@ module.exports = {
       },
       {
         ownerId: 2,
-        address: 'North of Tavernlight',
         address: '350 Tavernlight',
         city: 'Lumina',
         state: 'Everglow',
@@ -57,11 +56,7 @@ module.exports = {
           },
       {
         ownerId: 1,
-
-        address: 'East of Lunar Valley',
-
         address: '22 E. Lunar Valley',
-
         city: 'Moonreach',
         state: 'Silvercrest',
         country: 'Aetheria',
@@ -73,10 +68,7 @@ module.exports = {
       },
       {
         ownerId: 2,
-        address: 'Base of the dormant Pyropeak',
-
         address: '01 Pyropeak',
-
         city: 'Emberfall',
         state: 'Firepeak',
         country: 'Aetheria',
@@ -88,7 +80,7 @@ module.exports = {
       },
       {
               ownerId: 3,
-              address: '122 Stormweave Circle',
+        address: '122 Stormweave Circle',
         city: 'Stormhaven',
         state: 'Thunderhold',
         country: 'Aetheria',
