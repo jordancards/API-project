@@ -27,7 +27,7 @@ module.exports = {
         lat: 33,
         lng: -151,
         name: 'Gleamstone Inn',
-        description: 'Dawnstone Inn, nestled in the heart of Dawnshare, exudes a warm and welcoming ambiance. As you step through its doors, you are greeted by the gentle flicker of hearthlight and the comforting aroma of home-cooked meals. The inn\'s cozy interior, adorned with wooden beams and plush furnishings, invites weary travelers to unwind and relax. Friendly faces and lively chatter fill the air, creating a sense of camaraderie and community. Whether you seek a hearty meal, a soft bed for the night, or simply a moment of respite from your journey, Dawnstone Inn offers a haven of comfort and hospitality in the bustling town of Gleamstone.',
+        description: 'Dawnstone Inn, nestled in the heart of Dawnshare, exudes a warm and welcoming ambiance.',
         price: 70.00
       },
       {
@@ -39,7 +39,7 @@ module.exports = {
         lat: 55,
         lng: -140,
         name: 'Beaming Varia',
-        description: 'Beaming Varia, nestled in Lumina, dazzles with its radiant spires and bustling streets. The city pulses with energy, its markets alive with color and music. At its heart, the Great Plaza offers a vibrant oasis where dreams flourish beneath the city\'s radiant glow.',
+        description: 'Beaming Varia, nestled in Lumina, dazzles with its radiant spires and bustling streets. The city pulses with energy, its markets alive with color and music.',
         price: 100.00
       },
       {
@@ -51,7 +51,7 @@ module.exports = {
         lat: 35,
         lng: -195,
         name: 'Silent Shade Sanctuary',
-        description: 'Silent Shade Sanctuary is nestled deep within the heart of Mistwood, where the dense canopy of ancient trees obscures the sunlight, casting everything below in a perpetual twilight. As you step into the sanctuary, a hushed stillness envelops you, broken only by the occasional rustle of leaves and the distant call of unseen creatures. The air is cool and damp, carrying with it the earthy scent of moss and ferns. Soft tendrils of mist drift lazily through the air, lending an ethereal quality to the surroundings. Here, amidst the tranquil embrace of nature, weary travelers find respite from their journeys, their spirits soothed by the gentle whispers of the forest.',
+        description: 'Where the dense canopy of ancient trees obscures the sunlight, casting everything below in a perpetual twilight.',
       price: 150.00,
           },
       {
@@ -63,7 +63,7 @@ module.exports = {
         lat: 90,
         lng: -102,
         name: 'Moonbeam Haven',
-        description: 'Moonbeam Haven, nestled amidst the silver-lit forests of Silvercrest in the ethereal realm of Moonreach, beckons weary travelers with its serene beauty and tranquil atmosphere. As you step into this sanctuary, the soft glow of moonlight bathes everything in a shimmering silver hue, casting enchanting shadows that dance across the verdant landscape. The air is crisp and invigorating, carrying with it the faint scent of pine and wildflowers. Here, amidst the whispering trees and gentle rustle of leaves, time seems to slow, allowing visitors to find solace and rejuvenation in the embrace of nature. Whether you seek a peaceful retreat, a moment of reflection, or simply a respite from the hustle and bustle of everyday life, Moonbeam Haven offers a sanctuary of serenity and harmony beneath the silver-lit skies of Moonreach.',
+        description: 'In the realm of Moonreach, beckons weary travelers with its serene beauty and tranquil atmosphere.',
         price: 150.00
       },
       {
@@ -75,7 +75,7 @@ module.exports = {
         lat: 80,
         lng: -70,
         name: 'Emberfall Retreat',
-        description: 'Ember\'s Edge Retreat, nestled at the base of the dormant volcano, offers a unique haven of tranquility amidst the rugged beauty of the volcanic landscape. Within the inn\'s walls, a sense of calm prevails, with cozy furnishings and warm hearths inviting weary travelers to unwind and relax. Outside, the rugged beauty of the volcanic terrain beckons adventurers to explore its rocky slopes and hidden caverns, while the distant rumble of the volcano serves as a constant reminder of nature\'s awesome power. Whether seeking refuge from the elements or simply a moment of peace amidst the wilderness, Ember\'s Edge Retreat offers a sanctuary of comfort and serenity at the foot of the dormant volcano.',
+        description: 'Ember\'s Edge Retreat is nestled at the base of the dormant volcano. Within the inn, a sense of calm prevails, with cozy furnishings inviting weary travelers to unwind and relax.',
         price: 50.00
       },
       {
@@ -99,7 +99,7 @@ module.exports = {
         lat: 24,
         lng: -123,
         name: 'Serenity Springs Cottage',
-        description: 'Serenity Springs Cottage, nestled in the heart of the Great Sapphire Basin in Serenity Falls, Crystalbrooks, exudes a tranquil charm amidst the breathtaking beauty of its surroundings. Surrounded by towering sapphire-hued cliffs that reflect the vibrant blue of the sky above, the cottage sits beside a gentle spring whose waters shimmer with an otherworldly radiance.',
+        description: 'Serenity Springs Cottage, nestled in the heart of the Great Sapphire Basin in Serenity Falls, Crystalbrooks, exudes a tranquil charm amidst the breathtaking beauty of its surroundings.',
         price: 300.00
           },
       {
@@ -111,7 +111,7 @@ module.exports = {
         lat: 30,
         lng: -30,
         name: 'Frostholm Peak Ascent',
-        description: 'Frostholm\'s Peak Ascent beckons adventurers to embark on a journey through the icy wilderness of Frostholm, promising a breathtaking reward at its summit. As you set out from the frost-kissed village below, the air is crisp and biting, carrying with it the invigorating scent of pine and snow. The path ahead winds through towering evergreens and across frozen streams, each step bringing you closer to the towering peak that looms above.',
+        description: 'It promises a breathtaking reward at its summit. The path ahead winds through towering evergreens and across frozen streams.',
         price: 50.00
           },
       {
@@ -123,7 +123,7 @@ module.exports = {
         lat: 70,
         lng: -100,
         name: 'Legends Retreat',
-        description: 'Legends Retreat is a serene haven nestled amidst the gentle hills and whispering willows of Zephyr Heights. As you approach the retreat, the air is filled with the soft rustle of leaves and the sweet fragrance of blooming flowers, carried on the gentle zephyrs that sweep through the landscape. The tranquil atmosphere invites visitors to unwind and relax, offering respite from the hustle and bustle of everyday life.',
+        description: 'Legends Retreat is a serene haven nestled amidst the gentle hills and whispering willows.',
         price: 500.00
       },
     ], options, { validate: true})
