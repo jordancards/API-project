@@ -148,7 +148,7 @@ module.exports = {
     const Op = Sequelize.Op
     return queryInterface.bulkDelete(options, {
 
-      ownerId: { [Op.in]: ['Gleamstone Inn', 'Beaming Varia','Silent Shade Sanctuary','Moonbeam Haven','Emberfall Retreat','StormHaven Inn','Serenity Springs Cottage','Frostholm Peak Ascent','Legends Retreat' ]}
+      name: { [Op.in]: ['Gleamstone Inn', 'Beaming Varia','Silent Shade Sanctuary','Moonbeam Haven','Emberfall Retreat','StormHaven Inn','Serenity Springs Cottage','Frostholm Peak Ascent','Legends Retreat' ]}
     })
   }
 };

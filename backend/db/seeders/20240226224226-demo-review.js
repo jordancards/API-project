@@ -24,11 +24,7 @@ module.exports = {
       stars: 5
     },
     {
-<<<<<<< HEAD
-      spotId:7,
-=======
       spotId:2,
->>>>>>> bookings
       userId:1,
       review: 'A beautiful place with gorgeous scenery, but it was difficult to ignore the forest during rest',
       stars: 4
@@ -41,11 +37,7 @@ module.exports = {
       stars: 4
     },
     {
-<<<<<<< HEAD
-      spotId:9,
-=======
       spotId:4,
->>>>>>> bookings
       userId:3,
       review: 'Gorgeous area, with an amazing landscape. The flowers are beautiful and the host is amazing. I would come back again.',
       stars: 5
@@ -57,11 +49,7 @@ module.exports = {
       stars: 1
       },
         {
-<<<<<<< HEAD
-      spotId:2,
-=======
       spotId:6,
->>>>>>> bookings
       userId:1,
       review: 'Very convenient placement, it being in the middle of the woods of my travels. However the threats of the night-time kept me on my toes at every moment',
       stars: 2
