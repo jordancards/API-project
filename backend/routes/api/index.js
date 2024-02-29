@@ -56,7 +56,6 @@ router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
 
-
 router.use('/spots', spotsRouter);
 
 router.use('/reviews', reviewsRouter)

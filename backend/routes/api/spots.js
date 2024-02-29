@@ -143,6 +143,8 @@ router.get('/', async (req,res) => {
         name: spot.name,
         description: spot.description,
         price: parseFloat(spot.price),
+        createdAt: spot.createdAt,
+        updatedAt: spot.updatedAt,
         avgRating: spot.dataValues.avgRating,
         previewImage : spot.dataValues.previewImage
      }
@@ -266,7 +268,7 @@ router.get('/:spotId', async (req,res) => {
 
 
 //CREATE A SPOT
-router.post('/', async (req, res) => {
+router.post('/', requireAuth, validateSpots, async (req, res) => {
     let { address, city, state, country, lat, lng, name, description, price } = req.body;
     const spot = await Spot.create({
         ownerId: req.user.id,
