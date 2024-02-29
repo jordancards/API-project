@@ -416,4 +416,32 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     res.status(201).json(newReview)
 });
 
+
+
+//GET ALL BOOKINGS IN SPOTS ID
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+    const { spotId } = req.params
+    const currentUserId = req.user.id
+
+    const spot = await Spot.findByPk(spotId)
+    if (!spot) {
+        return res.status(404).json({ message: "Spot couldn't be found" });
+    }
+
+    if (spot.ownerId !== currentUserId) {
+
+        const notOwnerBookings = await Booking.findAll({
+            where: { spotId: spot.id },
+            attributes: ['spotId', 'startDate', 'endDate']
+        })
+        return res.status(200).json({ Bookings: notOwnerBookings })
+    }
+
+    const ownerBookings = await Booking.findAll({
+        where: { spotId: spot.id },
+        include: [{ model: User, attributes: ['id', 'firstName', 'lastName'] }]
+    })
+    return res.status(200).json({ Bookings: ownerBookings })
+})
+
 module.exports = router;
