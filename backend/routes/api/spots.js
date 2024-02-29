@@ -2,11 +2,13 @@ const express = require('express');
 const { Spot, SpotImage, User, Review, ReviewImage, Booking } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth')
 const { Op } = require('sequelize');
-const { check, validationResult } = require('express-validator');
+const { check, validationResult, query } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 
 const router = express.Router();
+
+
 
 const validateSpots = [
     check('address')
@@ -38,6 +40,56 @@ const validateSpots = [
         .withMessage('Price per day must be a positive number'),
     handleValidationErrors
 ];
+
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    check('stars')
+        .exists({ checkFalsy: true })
+        .isInt({ min: 1, max: 5})
+        .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+]
+
+const QueryFilters = [
+    query('page')
+        .optional()
+        .isInt({ min: 1 })
+        .withMessage("Page must be greater than or equal to 1"),
+    query('size')
+        .optional()
+        .isInt({ min: 1 })
+        .withMessage("Size must be greater than or equal to 1"),
+    query('maxLat')
+        .optional()
+        .isFloat({ min: -90, max: 90 })
+        .withMessage("Maximum latitude is invalid"),
+    query('minLat')
+        .optional()
+        .isFloat({ min: -180, max: 180 })
+        .withMessage("Minimum latitude is invalid"),
+    query('minLng')
+        .optional()
+        .isFloat({ min: -180, max: 180 })
+        .withMessage("Maximum longitude is invalid"),
+    query('maxLng')
+        .optional()
+        .isFloat({ min: -180, max: 180 })
+        .withMessage("Minimum longitude is invalid"),
+    query('minPrice')
+        .optional()
+        .isFloat({ min: 0 })
+        .withMessage("Minimum price must be greater than or equal to 0"),
+    query('maxPrice')
+        .optional()
+        .isFloat({ min: 0 })
+        .withMessage("Maximum price must be greater than or equal to 0"),
+    handleValidationErrors
+]
+
+
+
 
 //GET ALL SPOTS
 router.get('/', async (req,res) => {
@@ -385,7 +437,7 @@ router.get('/:spotId/reviews', async (req, res) => {
 
 
 //CREATE A REVIEW BASED ON SPOTS ID
-router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
     const { review, stars } = req.body
     const { spotId } = req.params
 
