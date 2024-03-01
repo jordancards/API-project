@@ -53,35 +53,35 @@ const validateReview = [
 ]
 
 const QueryFilters = [
-    query('page')
+    check('page')
         .optional()
         .isInt({ min: 1 })
         .withMessage("Page must be greater than or equal to 1"),
-    query('size')
+    check('size')
         .optional()
         .isInt({ min: 1 })
         .withMessage("Size must be greater than or equal to 1"),
-    query('maxLat')
+    check('maxLat')
         .optional()
         .isFloat({ min: -90, max: 90 })
         .withMessage("Maximum latitude is invalid"),
-    query('minLat')
+    check('minLat')
         .optional()
         .isFloat({ min: -180, max: 180 })
         .withMessage("Minimum latitude is invalid"),
-    query('minLng')
+    check('minLng')
         .optional()
         .isFloat({ min: -180, max: 180 })
         .withMessage("Maximum longitude is invalid"),
-    query('maxLng')
+    check('maxLng')
         .optional()
         .isFloat({ min: -180, max: 180 })
         .withMessage("Minimum longitude is invalid"),
-    query('minPrice')
+    check('minPrice')
         .optional()
         .isFloat({ min: 0 })
         .withMessage("Minimum price must be greater than or equal to 0"),
-    query('maxPrice')
+    check('maxPrice')
         .optional()
         .isFloat({ min: 0 })
         .withMessage("Maximum price must be greater than or equal to 0"),
@@ -102,17 +102,8 @@ router.get('/', QueryFilters, async (req,res) => {
     const pageNumber = parseInt(page)
     const pageSize = parseInt(size)
 
-    if (isNaN(pageNumber) || pageNumber <= 0) {
-        page = 1
-    } else {
-        page = pageNumber
-    }
-
-    if (isNaN(pageSize) || pageSize <= 0) {
-        size = 20
-    } else {
-        size = pageSize
-    }
+    if(!page || (parseInt(page) == NaN)) page = 1
+    if(!size || (parseInt(size) == NaN)) size = 20
 
     queryObj.limit = size
     queryObj.offset = size * (page - 1)
@@ -532,52 +523,58 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
 
 //CREATE A BOOKING BASED ON SPOTS ID
-router.post('/:spotId/bookings', requireAuth, async (req, res) => {
-    const { spotId } = req.params
-    const { startDate, endDate } = req.body
+router.post('/:spotId/bookings', requireAuth, async(req,res) => {
+    const  { spotId } = req.params;
+    const { startDate, endDate } = req.body;
+    const userId = req.user.id;
 
-    const spot = await Spot.findByPk(spotId)
+    let spot = await Spot.findByPk(spotId)
 
-    if (!spot) {
-        return res.status(404).json({
-            message: "Spot couldn't be found"
-        })
-    }
+    if (!spot) { return res.status(404).json({ "message": "Spot couldn't be found" }) }
 
+    if(spot.ownerId == userId) {return res.status(403).json({'message':'Forbidden'})}
 
-    if (req.user.id === spot.ownerId) {
-        return res.status(403).json({
-            message: "Forbidden"
-        })
-    }
+    let currentDate = new Date();
+    let newStartDate = new Date(startDate);
+    let newEndDate = new Date(endDate);
 
-
-    const existBooking = await Booking.findOne({
-        where: {
-            spotId: spotId,
-            startDate: { [Op.lte]: new Date(endDate) },
-            endDate: { [Op.gte]: new Date(startDate) }
+        if(currentDate > newStartDate){
+            return res.status(400).json({
+                "message": "Bad Request",
+                "errors": { "startDate": "startDate cannot be in the past"}
+              })
         }
-    })
+        if(newEndDate <= newStartDate){
+            return res.status(400).json({
+                "message": "Bad Request",
+                "errors": { "endDate": "endDate cannot be on or before startDate" }
+              })
+        }
 
-    if (existBooking) {
-        return res.status(403).json({
-            message: "Sorry, this spot is already booked for the specified dates",
-            errors: {
-                startDate: "Start date conflicts with an existing booking",
-                endDate: "End date conflicts with an existing booking"
+        const existingBooking = await Booking.findOne({
+            where:{
+                spotId: spotId,
+                [Op.or]: [
+                    {startDate: { [Op.between]: [newStartDate, newEndDate] }},
+                    {endDate: { [Op.between]: [newStartDate, newEndDate] }},
+                    {[Op.and]: [{ startDate: { [Op.lte]: newStartDate } },{ endDate: { [Op.gte]: newEndDate } }]}
+                ]
             }
         })
-    }
+        if(existingBooking){
+            return res.status(403).json({
+                "message": "Sorry, this spot is already booked for the specified dates",
+                "errors": {
+                  "startDate": "Start date conflicts with an existing booking",
+                  "endDate": "End date conflicts with an existing booking"
+                }
+              })
+        }
+    spot.startDate = startDate || spot.startDate
+    spot.endDate = endDate || spot.endDate
+    await spot.save()
 
-const newBooking = await Booking.create({
-    spotId: parseInt(spotId),
-    userId: req.user.id,
-    startDate: startDate,
-    endDate: endDate
-})
-
-    return res.json(newBooking);
+    return res.status(200).json(spot)
 })
 
 module.exports = router;
