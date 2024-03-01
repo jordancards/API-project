@@ -166,6 +166,8 @@ router.get('/', QueryFilters, async (req,res) => {
      }
         spotArr.push(response)
     }
+    page = parseInt(page)
+    size = parseInt(size)
     return res.status(200).json({Spots: spotArr})
 })
 
@@ -570,11 +572,17 @@ router.post('/:spotId/bookings', requireAuth, async(req,res) => {
                 }
               })
         }
-    spot.startDate = startDate || spot.startDate
-    spot.endDate = endDate || spot.endDate
-    await spot.save()
-
-    return res.status(200).json(spot)
+        let createdBooking = await Booking.create({ userId: userId, spotId: spotId, startDate, endDate })
+        const response = {
+            id: createdBooking.id,
+            spotId: createdBooking.spotId,
+            userId: createdBooking.userId,
+            startDate: createdBooking.startDate,
+            endDate: createdBooking.endDate,
+            createdAt: createdBooking.createdAt,
+            updatedAt: createdBooking.updatedAt
+        }
+        return res.status(200).json(response)
 })
 
 module.exports = router;
