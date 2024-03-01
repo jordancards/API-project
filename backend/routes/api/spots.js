@@ -92,12 +92,37 @@ const QueryFilters = [
 
 
 //GET ALL SPOTS
-router.get('/', async (req,res) => {
+router.get('/', QueryFilters, async (req,res) => {
 
     let {minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
     let queryObj = {
         where: {}
     }
+
+    const pageNumber = parseInt(page)
+    const pageSize = parseInt(size)
+
+    if (isNaN(pageNumber) || pageNumber <= 0) {
+        page = 1
+    } else {
+        page = pageNumber
+    }
+
+    if (isNaN(pageSize) || pageSize <= 0) {
+        size = 20
+    } else {
+        size = pageSize
+    }
+
+    queryObj.limit = size
+    queryObj.offset = size * (page - 1)
+
+    if (minLat) queryObj.where.lat = { [Op.gte]: parseFloat(minLat) }
+    if (maxLat) queryObj.where.lat = { [Op.lte]: parseFloat(maxLat) }
+    if (minLng) queryObj.where.lng = { [Op.gte]: parseFloat(minLng) }
+    if (maxLng) queryObj.where.lng = { [Op.lte]: parseFloat(maxLng) }
+    if (minPrice) queryObj.where.price = { [Op.gte]: parseFloat(minPrice) }
+    if (maxPrice) queryObj.where.price = { [Op.lte]: parseFloat(maxPrice) }
 
     const spots = await Spot.findAll({...queryObj})
     let spotArr = []
@@ -293,7 +318,9 @@ router.post('/', requireAuth, validateSpots, async (req, res) => {
         lng: parseFloat(spot.lng),
         name: spot.name,
         description: spot.description,
-        price:parseFloat(spot.price)
+        price: parseFloat(spot.price),
+        createdAt: spot.createdAt,
+        updatedAt: spot.updatedAt,
     }
     return res.status(201).json(response)
 })
