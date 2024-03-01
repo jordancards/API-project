@@ -301,30 +301,34 @@ router.post('/', requireAuth, validateSpots, async (req, res) => {
 
 
 //ADD IMAGE TO SPOT BASED ON SPOT'S ID
-router.post('/:reviewId/images', requireAuth, async (req, res) => {
-    const { reviewId } = req.params;
-    const { url } = req.body;
+router.post('/:spotId/images', requireAuth, async (req, res) => {
+    const { url, preview } = req.body
 
-    const review = await Review.findByPk(reviewId);
+    const spotId = await Spot.findByPk(req.params.spotId)
 
-    if (!review) {
-        return res.status(404).json({ message: "Review couldn't be found" });
+    if (!spotId) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"})
     }
 
-    if (req.user.id !== review.userId) {
-        return res.status(403).json({ message: "Forbidden" });
+    if (req.user.id !== spotId.ownerId) {
+        return res.status(403).json({ message: "Forbidden"})
     }
 
-    const imgCount = await ReviewImage.count({ where: { reviewId: reviewId } });
+    const spotImage = await SpotImage.create({
+        spotId: req.params.spotId,
+        url,
+        preview,
+    })
 
-    if (imgCount >= 10) {
-        return res.status(403).json({ message: "Maximum number of images for this resource was reached" });
-    }
+    res.json({
+        id: spotImage.id,
+        url: spotImage.url,
+        preview: spotImage.preview
+    })
+})
 
-    const newRevImg = await ReviewImage.create({ reviewId: reviewId, url });
 
-    res.json({ id: newRevImg.id, url: newRevImg.url });
-});
 
 //CREATE SPOT
 router.post('/', requireAuth, validateSpots, async (req, res) => {

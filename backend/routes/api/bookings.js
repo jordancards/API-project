@@ -63,7 +63,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         return res.status(404).json({ message: "Booking couldn't be found" });
     }
 
-    const currentDate = new Date();
+    let currentDate = new Date();
 
     if (new Date(startDate) < currentDate || new Date(endDate) < currentDate) {
         return res.status(403).json({ message: "Past bookings can't be modified" });
@@ -83,7 +83,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         });
     }
 
-    const existingBooking = await Booking.findOne({
+    let existingBooking = await Booking.findOne({
         where: {
             id: { [Op.ne]: bookingId },
             spotId: booking.spotId,
