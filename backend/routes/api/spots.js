@@ -94,7 +94,7 @@ const QueryFilters = [
 //GET ALL SPOTS
 router.get('/', QueryFilters, async (req,res) => {
 
-    let {minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    let {page, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
     let queryObj = {
         where: {}
     }
