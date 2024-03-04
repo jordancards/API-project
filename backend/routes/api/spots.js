@@ -168,7 +168,7 @@ router.get('/', QueryFilters, async (req,res) => {
     }
     page = parseInt(page)
     size = parseInt(size)
-    return res.status(200).json({Spots: spotArr})
+    return res.status(200).json({Spots: spotArr, page:page, size: size})
 })
 
 
